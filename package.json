@@ -1,0 +1,21 @@
+{
+  "name": "nuxt3-mf-host",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 3000",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview --port 3000",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "nuxt": "^3.15.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@nuxt/webpack-builder": "^4.2.2",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1"
+  }
+}
