@@ -2,7 +2,7 @@
   <div class="remote-wrapper">
     <Suspense>
       <template #default>
-        <RemoteComponent />
+        <RemoteComponent v-bind="$attrs" />
       </template>
       <template #fallback>
         <div class="loading">⏳ 載入遠端元件中...</div>
@@ -14,6 +14,10 @@
 
 <script setup lang="ts">
 import { ref, defineAsyncComponent, onErrorCaptured } from "vue";
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const error = ref<string | null>(null);
 

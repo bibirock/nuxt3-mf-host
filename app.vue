@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+const hostCount = ref(0);
+const remoteCount = ref(0);
+
+const increment = () => {
+  hostCount.value++;
+};
+
+const handleRemoteUpdate = (count: number) => {
+  console.log("收到遠端元件 Count:", count);
+  remoteCount.value = count;
+};
+</script>
+
 <template>
   <div class="container">
     <h1>🏠 Host App (Port 3000)</h1>
@@ -6,13 +22,21 @@
     <section class="section">
       <h2>📦 本地元件</h2>
       <div class="local-box">
-        <p>這是 Host 應用中的本地元件</p>
+        <p>這是 Host 應用中的本地元件 ！</p>
+        <p>Host Count: {{ hostCount }}</p>
+        <p>Remote Count (來自遠端): {{ remoteCount }}</p>
+        <button @click="increment">增加 Host Count</button>
       </div>
     </section>
 
     <section class="section">
       <h2>🌐 遠端元件 (來自 Remote 應用)</h2>
-      <RemoteWrapper />
+      <!-- 
+        傳遞 props: :count="hostCount"
+        監聽事件: @update-count="handleRemoteUpdate" 
+        (遠端元件需要 emit 'update-count' 並帶上數值)
+      -->
+      <RemoteWrapper :count="hostCount" @update-count="handleRemoteUpdate" />
     </section>
   </div>
 </template>
@@ -48,6 +72,13 @@ h1 {
   padding: 20px;
   background: #e3f2fd;
   border-radius: 8px;
-  border: 2px solid #2196f3;
+}
+
+.message {
+  margin-top: 10px;
+  padding: 10px;
+  background: #fff3e0;
+  border-radius: 4px;
+  color: #e65100;
 }
 </style>

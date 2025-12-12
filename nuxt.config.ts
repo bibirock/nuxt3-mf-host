@@ -1,9 +1,17 @@
+/*
+ * @Author: JoeChen
+ * @Date: 2025-12-11 21:08:58
+ * @LastEditors: JoeChen bibirock0104@gmail.com
+ * @LastEditTime: 2025-12-12 09:36:48
+ * @Description:
+ */
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { container } from "webpack";
 const { ModuleFederationPlugin } = container;
 
 export default defineNuxtConfig({
-  compatibilityDate: "2024-12-01",
+  compatibilityDate: "2025-12-12",
   devtools: { enabled: true },
   ssr: false,
 
@@ -18,9 +26,9 @@ export default defineNuxtConfig({
         config.output.publicPath = "auto";
         config.output.uniqueName = "hostApp";
 
-        // 禁用代碼分割以避免與 Module Federation 衝突
+        // 禁用 runtimeChunk 以避免與 Module Federation 衝突，但保留 splitChunks 以優化檔案大小
         config.optimization = config.optimization || {};
-        config.optimization.splitChunks = false;
+        config.optimization.runtimeChunk = false;
 
         config.plugins = config.plugins || [];
         config.plugins.push(
